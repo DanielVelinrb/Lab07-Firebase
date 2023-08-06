@@ -24,7 +24,7 @@ async function getStudents(db) {
 
 console.log(await getStudents(db));
 
-//import cors from 'cors';
+import cors from 'cors';
 import express from 'express';
 //const express = require('express')
 const app = express()
@@ -35,7 +35,8 @@ app.get('/', (req, res) => {
   res.send('EPN FIS')
 })
 
-//app.use(cors({ origin: 'http://127.0.0.1:5500' }));
+app.use(cors({ origin: 'http://127.0.0.1:5500'}));
+
 
 
 //read all students
@@ -92,7 +93,7 @@ app.post("/api/create", (req, res) => {
     (async () => {
       try {
         console.log(req);
-        const docRef = await addDoc(collection(db, "students"), req.body.student);
+        const docRef = await addDoc(collection(db, "students"), req.body);
         return res.status(200).send(`Document written with ID:  ${docRef.id}`);
       } catch (error) {
         console.log(error);
