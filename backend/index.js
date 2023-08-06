@@ -107,9 +107,8 @@ app.post("/api/create", (req, res) => {
 app.put("/api/update/:item_id", (req, res) => {
     (async () => {
       try {
-        console.log(req.params.item_id);
         const studentDocumentId = doc(db, "students", req.params.item_id);
-        await updateDoc(studentDocumentId, req.body.student);
+        await updateDoc(studentDocumentId, req.body);
         return res.status(200).send();
       } catch (error) {
         console.log(error);
@@ -122,8 +121,6 @@ app.put("/api/update/:item_id", (req, res) => {
   app.delete("/api/delete/:item_id", (req, res) => {
     (async () => {
       try {
-        //const studentDocumentId = doc(db, "students", req.params.item_id);
-        //console.log(req.params.item_id, studentDocumentId);
         await deleteDoc(doc(db, "students", req.params.item_id));
         return res.status(200).send();
       } catch (error) {
